@@ -1,0 +1,37 @@
+.footer-wrapper {
+  background: var(--primary);
+  color: white;
+  padding: 48px;
+  text-align: center;
+}
+
+.footer-inner {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-logo {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.footer-logo span {
+  color: var(--accent);
+}
+
+.footer-tagline {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 14px;
+  margin: 0;
+}
+
+.footer-copy {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 13px;
+  margin: 0;
+}

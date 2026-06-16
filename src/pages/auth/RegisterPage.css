@@ -1,0 +1,195 @@
+/* ── REGISTER SPECIFIC ── */
+
+.field-hint {
+  font-size: 11.5px;
+  color: #94A3B8;
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+.reg-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.reg-section-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #2D6BE4;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+/* ── ROLE SELECTOR ── */
+.role-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.role-option {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  background: #fff;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+  width: 100%;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.role-option:hover {
+  border-color: #2D6BE4;
+  box-shadow: 0 4px 16px rgba(45, 107, 228, 0.08);
+  transform: translateY(-1px);
+}
+
+.role-option-icon {
+  width: 44px;
+  height: 44px;
+  background: #EFF6FF;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.role-option-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke: #2D6BE4;
+}
+
+.role-option-body {
+  flex: 1;
+}
+
+.role-option-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 3px;
+  font-family: 'Sora', sans-serif;
+}
+
+.role-option-desc {
+  font-size: 13px;
+  color: #64748B;
+  line-height: 1.4;
+}
+
+.role-option-arrow {
+  width: 16px;
+  height: 16px;
+  stroke: #94A3B8;
+  flex-shrink: 0;
+  transition: stroke 0.2s;
+}
+
+.role-option:hover .role-option-arrow {
+  stroke: #2D6BE4;
+}
+
+/* ── SUCCESS SCREEN ── */
+.reg-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 0;
+  gap: 16px;
+}
+
+.reg-success-icon {
+  width: 64px;
+  height: 64px;
+  background: #D1FAE5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.reg-success-icon svg {
+  width: 28px;
+  height: 28px;
+  stroke: #059669;
+}
+
+.reg-success-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: #0F172A;
+  letter-spacing: -0.5px;
+  margin: 0;
+}
+
+.reg-success-msg {
+  font-size: 14px;
+  color: #64748B;
+  line-height: 1.65;
+  max-width: 360px;
+  margin: 0;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .reg-two-col {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .role-option {
+    padding: 14px 16px;
+    gap: 12px;
+  }
+
+  .role-option-icon {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+@media (max-width: 480px) {
+  .role-option-label {
+    font-size: 14px;
+  }
+
+  .role-option-desc {
+    font-size: 12px;
+  }
+}
+
+/* ── SELECT FIELD ── */
+.field-select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  padding-right: 40px;
+}
+
+.field-select.placeholder {
+  color: #94A3B8;
+}
+
+.field-select option {
+  color: #0F172A;
+}
+.field-select:disabled {
+  background: #F8FAFC;
+  color: #94A3B8;
+  cursor: not-allowed;
+}

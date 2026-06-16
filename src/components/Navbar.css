@@ -1,0 +1,36 @@
+.navbar-wrapper {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 0 48px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.navbar-logo {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--primary);
+  letter-spacing: -0.5px;
+  cursor: pointer;
+}
+
+.navbar-logo span {
+  color: var(--accent);
+}
+
+.navbar-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+@media (max-width: 576px) {
+  .navbar-wrapper {
+    padding: 0 20px;
+  }
+}
