@@ -20,6 +20,15 @@ API.interceptors.response.use(
   async (error) => {
     const original = error.config
 
+    // Rate limited (429) — never retry automatically. Retrying would just
+    // send another request into the same limiter window and make the
+    // lockout worse, or even loop indefinitely if combined with other
+    // retry logic. Just surface the error as-is so the UI can show the
+    // server's friendly "please wait" message and stop there.
+    if (error.response?.status === 429) {
+      return Promise.reject(error)
+    }
+
     if (error.response?.status === 401 && !original._retry) {
       // FormData bodies (file uploads) can't be safely re-sent after being
       // consumed once by the browser/XHR layer. Retrying with the same
