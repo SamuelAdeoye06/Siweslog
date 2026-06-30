@@ -1,0 +1,369 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+.appr-page {
+  min-height: 100vh;
+  background: #F5F7FA;
+  font-family: 'DM Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.appr-nav {
+  background: #080F1F;
+  padding: 0 32px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+}
+
+.appr-logo {
+  font-family: 'Sora', sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+
+.appr-logo span { color: #4F8EF7; }
+
+.appr-body {
+  flex: 1;
+  padding: 40px 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.appr-container {
+  max-width: 680px;
+  width: 100%;
+}
+
+.appr-card {
+  background: #fff;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.appr-card-header {
+  padding: 24px 28px;
+  border-bottom: 1px solid #E2E8F0;
+  background: #F8FAFC;
+}
+
+.appr-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #2D6BE4;
+  margin-bottom: 8px;
+}
+
+.appr-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: #0F172A;
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+
+.appr-subtitle {
+  font-size: 13.5px;
+  color: #64748B;
+}
+
+.appr-card-body {
+  padding: 28px;
+}
+
+.appr-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.appr-info-item {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+.appr-info-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #94A3B8;
+  margin-bottom: 4px;
+}
+
+.appr-info-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0F172A;
+}
+
+.appr-section-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 12px;
+  margin-top: 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.appr-section-title:first-child {
+  margin-top: 0;
+}
+
+.appr-day-block {
+  margin-bottom: 14px;
+}
+
+.appr-day-label {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #2D6BE4;
+  margin-bottom: 4px;
+}
+
+.appr-day-text {
+  font-size: 13.5px;
+  color: #334155;
+  line-height: 1.6;
+  background: #F8FAFC;
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+.appr-day-empty {
+  font-size: 13px;
+  color: #CBD5E1;
+  font-style: italic;
+}
+
+.appr-text-block {
+  font-size: 13.5px;
+  color: #334155;
+  line-height: 1.7;
+  background: #F8FAFC;
+  border-radius: 8px;
+  padding: 14px 16px;
+  white-space: pre-wrap;
+}
+
+.appr-attachments {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.appr-attachment-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #2D6BE4;
+  text-decoration: none;
+  font-weight: 500;
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  border-radius: 6px;
+  padding: 8px 12px;
+  width: fit-content;
+}
+
+.appr-attachment-link svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ── ACTION FORM ── */
+.appr-action-card {
+  background: #fff;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 28px;
+}
+
+.appr-field {
+  margin-bottom: 18px;
+}
+
+.appr-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #0F172A;
+  margin-bottom: 7px;
+}
+
+.appr-input,
+.appr-textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: #0F172A;
+  background: #fff;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.appr-input:focus,
+.appr-textarea:focus {
+  border-color: #2D6BE4;
+  box-shadow: 0 0 0 3px rgba(45,107,228,0.1);
+}
+
+.appr-error {
+  font-size: 12px;
+  color: #DC2626;
+  margin-top: 5px;
+}
+
+.appr-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.appr-btn-approve {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #16A34A;
+  color: #fff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.appr-btn-approve:hover:not(:disabled) {
+  background: #15803D;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(22,163,74,0.25);
+}
+
+.appr-btn-approve:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.appr-btn-approve svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ── STATE SCREENS (loading, error, success) ── */
+.appr-state-card {
+  background: #fff;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 56px 32px;
+  text-align: center;
+}
+
+.appr-state-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.appr-state-icon.success { background: #D1FAE5; }
+.appr-state-icon.error { background: #FEE2E2; }
+
+.appr-state-icon svg {
+  width: 28px;
+  height: 28px;
+  stroke-width: 2.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.appr-state-icon.success svg { stroke: #059669; }
+.appr-state-icon.error svg { stroke: #DC2626; }
+
+.appr-state-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: #0F172A;
+  margin-bottom: 8px;
+}
+
+.appr-state-desc {
+  font-size: 14px;
+  color: #64748B;
+  line-height: 1.65;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.appr-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #E2E8F0;
+  border-top-color: #4F8EF7;
+  border-radius: 50%;
+  animation: appr-spin 0.7s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes appr-spin { to { transform: rotate(360deg); } }
+
+.appr-btn-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: appr-spin 0.7s linear infinite;
+}
+
+.appr-footer {
+  text-align: center;
+  padding: 24px;
+  font-size: 12px;
+  color: #94A3B8;
+}
+
+@media (max-width: 600px) {
+  .appr-info-grid {
+    grid-template-columns: 1fr;
+  }
+  .appr-card-body, .appr-card-header, .appr-action-card {
+    padding: 20px;
+  }
+}

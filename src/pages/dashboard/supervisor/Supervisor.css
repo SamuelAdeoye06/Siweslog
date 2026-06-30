@@ -1,0 +1,372 @@
+/* ── Supervisor Dashboard — component styles ────────────────────── */
+
+/* Back button + student header */
+.sv-page-header {
+  margin-bottom: 20px;
+}
+
+.sv-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: #64748B;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 16px;
+  transition: color 0.15s;
+}
+
+.sv-back-btn:hover { color: #0F172A; }
+
+.sv-student-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.sv-company-badge {
+  background: #EFF6FF;
+  color: #1E40AF;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+  margin-top: 4px;
+}
+
+/* ── Tabs ────────────────────────────────────────────────────────── */
+.sv-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid #E2E8F0;
+  margin-bottom: 0;
+}
+
+.sv-tab-btn {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  padding: 10px 20px;
+  font-size: 13.5px;
+  font-weight: 500;
+  font-family: inherit;
+  color: #64748B;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.sv-tab-btn:hover { color: #0F172A; }
+.sv-tab-btn.active { color: #4F8EF7; border-bottom-color: #4F8EF7; font-weight: 600; }
+
+/* ── Logbook list ─────────────────────────────────────────────────── */
+.sv-log-list {
+  border-radius: 0;
+}
+
+.sv-log-item {
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.sv-log-item:last-child { border-bottom: none; }
+
+.sv-log-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  padding: 14px 20px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+  text-align: left;
+}
+
+.sv-log-row:hover { background: #F8FAFC; }
+.sv-log-item.expanded .sv-log-row { background: #F8FAFC; }
+
+.sv-log-row-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.sv-log-week {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0F172A;
+  min-width: 64px;
+}
+
+.sv-log-period {
+  font-size: 12.5px;
+  color: #64748B;
+}
+
+.sv-log-row-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #94A3B8;
+}
+
+/* ── Log Detail (expanded) ─────────────────────────────────────────── */
+.sv-log-detail {
+  padding: 20px 20px 24px;
+  background: #FAFBFD;
+  border-top: 1px solid #E2E8F0;
+}
+
+.sv-log-detail-section {
+  margin-bottom: 20px;
+}
+
+.sv-log-detail-section:last-child { margin-bottom: 0; }
+
+.sv-log-detail-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #94A3B8;
+  margin-bottom: 8px;
+}
+
+.sv-log-detail-value {
+  font-size: 13.5px;
+  color: #334155;
+  line-height: 1.6;
+}
+
+.sv-pre { white-space: pre-wrap; }
+
+.sv-days-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sv-day-row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.sv-day-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748B;
+}
+
+.sv-day-content {
+  font-size: 13.5px;
+  color: #334155;
+  line-height: 1.55;
+}
+
+.sv-empty-day { color: #CBD5E1; font-style: italic; }
+
+/* ── Sign-off blocks ───────────────────────────────────────────────── */
+.sv-signoff-block {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  border: 1px solid;
+}
+
+.sv-signoff-block.industry {
+  background: #F0FDF4;
+  border-color: #BBF7D0;
+}
+
+.sv-signoff-block.school {
+  background: #EFF6FF;
+  border-color: #BFDBFE;
+}
+
+.sv-signoff-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #94A3B8;
+  margin-bottom: 6px;
+}
+
+.sv-signoff-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #0F172A;
+  margin-bottom: 4px;
+}
+
+.sv-signoff-comment {
+  font-size: 13px;
+  color: #334155;
+  line-height: 1.6;
+  margin-bottom: 6px;
+}
+
+.sv-signoff-date {
+  font-size: 11.5px;
+  color: #94A3B8;
+}
+
+/* ── Comment form ──────────────────────────────────────────────────── */
+.sv-comment-form-wrap {
+  margin-top: 24px;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px dashed #4F8EF7;
+  background: #F0F7FF;
+}
+
+.sv-comment-form-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #1E40AF;
+  margin-bottom: 14px;
+}
+
+.sv-comment-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* ── Attachments ───────────────────────────────────────────────────── */
+.sv-attachments { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.sv-attachment-link {
+  display: inline-block;
+  background: #EFF6FF;
+  color: #1E40AF;
+  border: 1px solid #BFDBFE;
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 12.5px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.sv-attachment-link:hover { background: #DBEAFE; }
+
+/* ── Placement tab ─────────────────────────────────────────────────── */
+.sv-placement-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 24px 20px;
+}
+
+.sv-placement-field { display: flex; flex-direction: column; gap: 4px; }
+.sv-placement-field--full { grid-column: 1 / -1; }
+
+.sv-placement-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #94A3B8;
+}
+
+.sv-placement-value {
+  font-size: 13.5px;
+  color: #334155;
+  line-height: 1.55;
+}
+
+.sv-organogram {
+  max-width: 100%;
+  border-radius: 8px;
+  border: 1px solid #E2E8F0;
+  margin-top: 8px;
+}
+
+/* ── Visits tab ────────────────────────────────────────────────────── */
+.sv-visits-layout {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 0;
+  align-items: start;
+}
+
+.sv-visit-form-wrap {
+  padding: 24px 20px;
+  border-right: 1px solid #E2E8F0;
+}
+
+.sv-visit-form-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 16px;
+}
+
+.sv-visit-form { display: flex; flex-direction: column; gap: 0; }
+
+.sv-visits-list-wrap {
+  padding: 24px 20px;
+}
+
+.sv-visits-list { display: flex; flex-direction: column; gap: 12px; }
+
+.sv-visit-card {
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 14px 16px;
+  background: #fff;
+}
+
+.sv-visit-date {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #0F172A;
+  margin-bottom: 8px;
+}
+
+.sv-visit-comment {
+  font-size: 13px;
+  color: #334155;
+  line-height: 1.6;
+  margin-bottom: 8px;
+  white-space: pre-wrap;
+}
+
+.sv-visit-signed {
+  font-size: 11.5px;
+  color: #94A3B8;
+}
+
+/* ── Responsive ────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .sv-placement-grid { grid-template-columns: 1fr; }
+
+  .sv-visits-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sv-visit-form-wrap {
+    border-right: none;
+    border-bottom: 1px solid #E2E8F0;
+  }
+
+  .sv-day-row {
+    grid-template-columns: 75px 1fr;
+  }
+
+  .sv-tabs { overflow-x: auto; }
+  .sv-tab-btn { padding: 10px 14px; white-space: nowrap; }
+
+  .sv-log-row { padding: 12px 16px; }
+  .sv-log-detail { padding: 16px; }
+}

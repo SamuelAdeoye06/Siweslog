@@ -11,7 +11,7 @@ const SADashboard = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async (isBackgroundRefresh = false) => {
       try {
         const [statsRes, schoolsRes] = await Promise.all([
           API.get('/super-admin/stats'),
@@ -22,10 +22,14 @@ const SADashboard = () => {
       } catch (err) {
         console.error(err)
       } finally {
-        setLoading(false)
+        if (!isBackgroundRefresh) setLoading(false)
       }
     }
+
     fetchData()
+    // A newly registered school should show up here without a manual reload
+    const interval = setInterval(() => fetchData(true), 30000)
+    return () => clearInterval(interval)
   }, [])
 
   const handleApprove = async (id) => {

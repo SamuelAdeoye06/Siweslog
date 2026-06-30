@@ -4,6 +4,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import API from '../../../api/axios'
 import useAuthStore from '../../../store/authStore'
+import { useToast } from '../../../components/ToastContext'
 import './SettingsPage.css'
 
 // ── ALERT ──
@@ -57,13 +58,34 @@ const PhotoModal = ({ currentPhoto, initials, onClose, onSaved }) => {
     try {
       const formData = new FormData()
       formData.append('photo', selectedFile)
-      const res = await API.patch('/settings/update-photo', formData)
+      const res = await API.patch('/settings/update-photo', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      })
       const photoUrl = res.data.profilePhoto
       // Sync into authStore so the topbar avatar updates immediately
       updateUser({ profilePhoto: photoUrl })
       onSaved({ profilePhoto: photoUrl })
     } catch (err) {
-      setError(err.response?.data?.message || 'Photo upload failed. Please try again.')
+      // If the session token had just expired, axios already refreshed it
+      // behind the scenes (see api/axios.js). To prevent the user from
+      // having to click a second time, we immediately retry the request
+      // with a fresh FormData instance.
+      if (err.response?.status === 401) {
+        try {
+          const retryFormData = new FormData()
+          retryFormData.append('photo', selectedFile)
+          const res = await API.patch('/settings/update-photo', retryFormData, {
+            headers: { 'Content-Type': 'multipart/form-data' }
+          })
+          const photoUrl = res.data.profilePhoto
+          updateUser({ profilePhoto: photoUrl })
+          onSaved({ profilePhoto: photoUrl })
+        } catch (retryErr) {
+          setError(retryErr.response?.data?.message || 'Photo upload failed. Please try again.')
+        }
+      } else {
+        setError(err.response?.data?.message || 'Photo upload failed. Please try again.')
+      }
     } finally {
       setLoading(false)
     }
@@ -123,8 +145,8 @@ const PhotoModal = ({ currentPhoto, initials, onClose, onSaved }) => {
 
 // ── PROFILE SECTION ──
 const ProfileSection = ({ user, onUpdate }) => {
+  const { showToast } = useToast()
   const [showModal, setShowModal] = useState(false)
-  const [alert, setAlert] = useState(null)
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -138,16 +160,15 @@ const ProfileSection = ({ user, onUpdate }) => {
       lastName: Yup.string().required('Last name is required'),
     }),
     onSubmit: async (values) => {
-      setAlert(null)
       try {
         const res = await API.patch('/settings/update-profile', values)
         const stored = JSON.parse(localStorage.getItem('user') || '{}')
         const updated = { ...stored, firstName: res.data.user.firstName, lastName: res.data.user.lastName }
         localStorage.setItem('user', JSON.stringify(updated))
-        setAlert({ type: 'success', message: 'Profile updated successfully' })
+        showToast('Profile updated successfully', 'success')
         onUpdate(res.data.user)
       } catch (err) {
-        setAlert({ type: 'error', message: err.response?.data?.message || 'Update failed' })
+        showToast(err.response?.data?.message || 'Update failed', 'error')
       }
     }
   })
@@ -159,8 +180,8 @@ const ProfileSection = ({ user, onUpdate }) => {
   const handlePhotoSaved = useCallback((updates) => {
     onUpdate(updates)
     setShowModal(false)
-    setAlert({ type: 'success', message: 'Profile photo updated successfully' })
-  }, [onUpdate])
+    showToast('Profile photo updated successfully', 'success')
+  }, [onUpdate, showToast])
 
   return (
     <>
@@ -183,8 +204,6 @@ const ProfileSection = ({ user, onUpdate }) => {
           </div>
         </div>
         <div className="settings-section-body">
-          {alert && <Alert type={alert.type} message={alert.message} />}
-
           {/* Photo */}
           <div className="settings-photo-row">
             <div className="settings-avatar-wrap">

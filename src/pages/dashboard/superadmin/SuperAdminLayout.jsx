@@ -3,6 +3,7 @@ import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import useAuthStore from '../../../store/authStore'
 import API from '../../../api/axios'
 import './Dashboard.css'
+import NotificationBell from '../../../components/NotificationBell'
 
 const navItems = [
   {
@@ -95,27 +96,32 @@ const SuperAdminLayout = () => {
             </button>
             <div className="dash-topbar-title">Super Admin</div>
           </div>
-          <div className="dash-topbar-user">
-            <div>
-              <div className="dash-user-name">{user?.firstName} {user?.lastName}</div>
-              <div className="dash-user-role">Super Admin</div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <NotificationBell basePath="/super-admin" />       
+
+            <div className="dash-topbar-user">
+              <div>
+                <div className="dash-user-name">{user?.firstName} {user?.lastName}</div>
+                <div className="dash-user-role">Super Admin</div>
+              </div>
+              <button
+                className="dash-user-avatar-btn"
+                onClick={() => navigate('/super-admin/settings')}
+                title="Go to Settings"
+                aria-label="Open settings"
+              >
+                {user?.profilePhoto ? (
+                  <img
+                    src={user.profilePhoto}
+                    alt="Profile"
+                    className="dash-user-avatar-img"
+                  />
+                ) : (
+                  <div className="dash-user-avatar">{initials}</div>
+                )}
+              </button>
             </div>
-            <button
-              className="dash-user-avatar-btn"
-              onClick={() => navigate('/super-admin/settings')}
-              title="Go to Settings"
-              aria-label="Open settings"
-            >
-              {user?.profilePhoto ? (
-                <img
-                  src={user.profilePhoto}
-                  alt="Profile"
-                  className="dash-user-avatar-img"
-                />
-              ) : (
-                <div className="dash-user-avatar">{initials}</div>
-              )}
-            </button>
           </div>
         </header>
 

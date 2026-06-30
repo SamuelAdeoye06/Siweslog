@@ -679,3 +679,14 @@
   .dash-stat-value { font-size: 22px; }
   .dash-page-title { font-size: 18px; }
 }
+
+/* ── DISABLED NAV LINK (placement gate) ── */
+.dash-nav-link.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dash-nav-link.disabled:hover {
+  background: transparent;
+  color: rgba(255,255,255,0.55);
+}

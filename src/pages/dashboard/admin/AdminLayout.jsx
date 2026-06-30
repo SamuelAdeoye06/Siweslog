@@ -3,6 +3,7 @@ import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import useAuthStore from '../../../store/authStore'
 import API from '../../../api/axios'
 import '../superadmin/Dashboard.css'
+import NotificationBell from '../../../components/NotificationBell'
 
 const navItems = [
   {
@@ -86,22 +87,27 @@ const AdminLayout = () => {
             </button>
             <div className="dash-topbar-title">{user?.schoolId?.name || 'IT Admin'}</div>
           </div>
-          <div className="dash-topbar-user">
-            <div>
-              <div className="dash-user-name">{user?.firstName} {user?.lastName}</div>
-              <div className="dash-user-role">IT Admin</div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <NotificationBell basePath="/admin" />
+              
+            <div className="dash-topbar-user">
+              <div>
+                <div className="dash-user-name">{user?.firstName} {user?.lastName}</div>
+                <div className="dash-user-role">IT Admin</div>
+              </div>
+              <button
+                className="dash-user-avatar-btn"
+                onClick={() => navigate('/admin/settings')}
+                title="Go to Settings"
+              >
+                {user?.profilePhoto ? (
+                  <img src={user.profilePhoto} alt="Profile" className="dash-user-avatar-img" />
+                ) : (
+                  <div className="dash-user-avatar">{initials}</div>
+                )}
+              </button>
             </div>
-            <button
-              className="dash-user-avatar-btn"
-              onClick={() => navigate('/admin/settings')}
-              title="Go to Settings"
-            >
-              {user?.profilePhoto ? (
-                <img src={user.profilePhoto} alt="Profile" className="dash-user-avatar-img" />
-              ) : (
-                <div className="dash-user-avatar">{initials}</div>
-              )}
-            </button>
           </div>
         </header>
         <div className="dash-body">

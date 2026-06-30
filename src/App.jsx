@@ -21,10 +21,27 @@ import AdminStudents from './pages/dashboard/admin/AdminStudents'
 import AdminSupervisors from './pages/dashboard/admin/AdminSupervisors'
 import AdminSettings from './pages/dashboard/admin/AdminSettings'
 import { DialogProvider } from './components/DialogProvider'
+import { ToastProvider } from './components/ToastProvider'
+import StudentLayout from './pages/dashboard/student/StudentLayout'
+import StudentDashboard from './pages/dashboard/student/StudentDashboard'
+import StudentPlacement from './pages/dashboard/student/StudentPlacement'
+import StudentLogbook from './pages/dashboard/student/StudentLogbook'
+import WeeklyLogEntry from './pages/dashboard/student/WeeklyLogEntry'
+import StudentSettings from './pages/dashboard/student/StudentSettings'
+import ApprovalPage from './pages/approval/ApprovalPage'
+import SupervisorLayout from './pages/dashboard/supervisor/SupervisorLayout'
+import SupervisorDashboard from './pages/dashboard/supervisor/SupervisorDashboard'
+import SupervisorStudents from './pages/dashboard/supervisor/SupervisorStudents'
+import SupervisorStudentView from './pages/dashboard/supervisor/SupervisorStudentView'
+import SupervisorSettings from './pages/dashboard/supervisor/SupervisorSettings'
+import NotificationsPage from './pages/dashboard/NotificationsPage'
+import NotFoundPage from './pages/NotFoundPage'
+import UnauthorizedPage from './pages/UnauthorizedPage'
 
 const App = () => {
   return (
     <DialogProvider>
+      <ToastProvider>
       <BrowserRouter>
         <ScrollToTop/>
         <Routes>
@@ -38,19 +55,24 @@ const App = () => {
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/cookies" element={<CookiePage />} />
+        <Route path="/approve-log/:token" element={<ApprovalPage />} />
 
-        <Route path="/unauthorized" element={
-          <div className="container mt-5">
-            <h3 className="text-center text-danger">Access Denied</h3>
-          </div>
-        } />
+        <Route path="/unauthorized" element={<UnauthorizedPage />} />
 
         {/* Protected */}
-        <Route path="/student/*" element={
+        <Route path="/student" element={
           <ProtectedRoute allowedRoles={['student']}>
-            <div>Student Dashboard</div>
+            <StudentLayout />
           </ProtectedRoute>
-        } />
+        }>
+          <Route path="dashboard" element={<StudentDashboard />} />
+          <Route path="placement" element={<StudentPlacement />} />
+          <Route path="logbook" element={<StudentLogbook />} />
+          <Route path="logbook/week/:weekNumber" element={<WeeklyLogEntry />} />
+          <Route path="settings" element={<StudentSettings />} />
+          <Route path="notifications" element={<NotificationsPage />} />
+          <Route index element={<Navigate to="dashboard" replace />} />
+        </Route>
 
         <Route path="/admin" element={
           <ProtectedRoute allowedRoles={['it_admin']}>
@@ -61,15 +83,23 @@ const App = () => {
           <Route path="students" element={<AdminStudents />} />
           <Route path="supervisors" element={<AdminSupervisors />} />
           <Route path="settings" element={<AdminSettings />} />
+          <Route path="notifications" element={<NotificationsPage />} />
           <Route index element={<Navigate to="dashboard" replace />} />
         </Route>
 
-        <Route path="/supervisor/*" element={
+        <Route path="/supervisor" element={
           <ProtectedRoute allowedRoles={['school_supervisor']}>
-            <div>Supervisor Dashboard</div>
+            <SupervisorLayout />
           </ProtectedRoute>
-        } />
-        
+        }>
+          <Route path="dashboard" element={<SupervisorDashboard />} />
+          <Route path="students" element={<SupervisorStudents />} />
+          <Route path="students/:studentUserId" element={<SupervisorStudentView />} />
+          <Route path="settings" element={<SupervisorSettings />} />
+          <Route path="notifications" element={<NotificationsPage />} />
+          <Route index element={<Navigate to="dashboard" replace />} />
+        </Route>
+
         <Route path="/super-admin" element={
           <ProtectedRoute allowedRoles={['super_admin']}>
             <SuperAdminLayout />
@@ -79,11 +109,14 @@ const App = () => {
           <Route path="schools" element={<SASchools />} />
           <Route path="users" element={<SAUsers />} />
           <Route path="settings" element={<SettingsPage />} />
+          <Route path="notifications" element={<NotificationsPage />} />
           <Route index element={<Navigate to="dashboard" replace />} />
         </Route>
-        <Route path="*" element={<Navigate to="/" replace />} />
+
+        <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
+      </ToastProvider>
     </DialogProvider>
   )
 }

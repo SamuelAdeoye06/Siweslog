@@ -51,6 +51,12 @@ const studentSchema = Yup.object({
   faculty: Yup.string().required('Faculty is required'),
   yearOfStudy: Yup.string().required('Year of study is required'),
   siwesCycleYear: Yup.string().required('SIWES cycle year is required'),
+  siwesDurationWeeks: Yup.number()
+    .typeError('Enter a number')
+    .integer('Enter a whole number')
+    .min(1, 'Must be at least 1 week')
+    .max(52, 'That seems too long — check the number of weeks')
+    .required('SIWES duration is required'),
   password: passwordRules,
   confirmPassword: Yup.string().oneOf([Yup.ref('password')], 'Passwords do not match').required('Please confirm your password'),
 })
@@ -167,7 +173,7 @@ const StudentForm = ({ onSuccess }) => {
   const [loading, setLoading] = useState(false)
   const { setAuth } = useAuthStore()
   const formik = useFormik({
-    initialValues: { registrationCode: '', firstName: '', lastName: '', email: '', phone: '', matricNumber: '', department: '', faculty: '', yearOfStudy: '', siwesCycleYear: '', password: '', confirmPassword: '' },
+    initialValues: { registrationCode: '', firstName: '', lastName: '', email: '', phone: '', matricNumber: '', department: '', faculty: '', yearOfStudy: '', siwesCycleYear: '', siwesDurationWeeks: '', password: '', confirmPassword: '' },
     validationSchema: studentSchema,
     onSubmit: async (values) => {
       setLoading(true)
@@ -176,7 +182,7 @@ const StudentForm = ({ onSuccess }) => {
         const { confirmPassword, ...payload } = values
         const res = await API.post('/auth/register-student', payload)
         setAuth(res.data.user, res.data.accessToken)
-        onSuccess('/student/dashboard')
+        onSuccess('/student/placement')
       } catch (err) {
         setServerError(err.response?.data?.message || 'Registration failed. Please try again.')
       } finally { setLoading(false) }
@@ -187,12 +193,12 @@ const StudentForm = ({ onSuccess }) => {
       {serverError && <ErrorAlert message={serverError} />}
       <Field label="School Registration Code" name="registrationCode" placeholder="e.g. RUN-2025-IT" formik={formik} hint="Get this code from your IT unit" />
       <div className="reg-two-col">
-        <Field label="First Name" name="firstName" placeholder="e.g. Samuel" formik={formik} />
-        <Field label="Last Name" name="lastName" placeholder="e.g. Adeoye" formik={formik} />
+        <Field label="First Name" name="firstName" placeholder="e.g. John" formik={formik} />
+        <Field label="Last Name" name="lastName" placeholder="e.g. Doe" formik={formik} />
       </div>
       <Field label="Email Address" name="email" type="email" placeholder="you@example.com" formik={formik} />
       <Field label="Phone Number" name="phone" placeholder="08012345678" formik={formik} />
-      <Field label="Matric Number" name="matricNumber" placeholder="e.g. RUN/COE/21/0001" formik={formik} />
+      <Field label="Matric Number" name="matricNumber" placeholder="e.g. RUN/CPE/22/00000" formik={formik} />
       <div className="reg-two-col">
         <Field label="Department" name="department" placeholder="e.g. Computer Engineering" formik={formik} />
         <Field label="Faculty" name="faculty" placeholder="e.g. Engineering" formik={formik} />
@@ -201,6 +207,7 @@ const StudentForm = ({ onSuccess }) => {
         <SelectField label="Year of Study" name="yearOfStudy" options={YEAR_OPTIONS} placeholder="Select level..." formik={formik} />
         <SelectField label="SIWES Cycle Year" name="siwesCycleYear" options={CYCLE_YEARS} placeholder="Select year..." formik={formik} hint="The academic year you are doing SIWES" />
       </div>
+      <Field label="SIWES Duration (in weeks)" name="siwesDurationWeeks" type="number" placeholder="e.g. 24" formik={formik} hint="Check with your IT unit — common durations are 12 or 24 weeks" />
       <Field label="Password" name="password" type="password" placeholder="Create a strong password" formik={formik} hint="Min 8 chars · uppercase · lowercase · number · special character" />
       <Field label="Confirm Password" name="confirmPassword" type="password" placeholder="Repeat your password" formik={formik} />
       <SubmitBtn loading={loading} label="Create Account" />

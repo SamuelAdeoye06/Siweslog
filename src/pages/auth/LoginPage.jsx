@@ -18,6 +18,9 @@ const LoginPage = () => {
       email: '',
       password: '',
     },
+    // We deliberately do NOT pass validateOnMount/enableReinitialize here,
+    // and onSubmit never calls resetForm() — so a failed login keeps
+    // whatever the user typed in both fields.
     validationSchema: Yup.object({
       email: Yup.string()
         .email('Enter a valid email address')
@@ -32,7 +35,6 @@ const LoginPage = () => {
         const res = await API.post('/auth/login', values)
         setAuth(res.data.user, res.data.accessToken)
 
-        // Redirect based on role
         const role = res.data.user.role
         if (role === 'student') navigate('/student/dashboard')
         else if (role === 'it_admin') navigate('/admin/dashboard')
@@ -40,6 +42,10 @@ const LoginPage = () => {
         else if (role === 'super_admin') navigate('/super-admin/dashboard')
         else navigate('/')
       } catch (err) {
+        // IMPORTANT: do not call formik.resetForm() or clear formik.values
+        // here. The error message is set in local state (serverError) and
+        // has no timer attached to it anywhere in this component — it will
+        // stay visible until the user dismisses it or submits again.
         setServerError(err.response?.data?.message || 'Something went wrong. Please try again.')
       } finally {
         setLoading(false)
@@ -116,17 +122,35 @@ const LoginPage = () => {
           </p>
 
           {serverError && (
-            <div className="auth-alert">
+            <div className="auth-alert" role="alert">
               <svg viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="10"/>
                 <line x1="12" y1="8" x2="12" y2="12"/>
                 <line x1="12" y1="16" x2="12.01" y2="16"/>
               </svg>
-              {serverError}
+              <span style={{ flex: 1 }}>{serverError}</span>
+              <button
+                type="button"
+                onClick={() => setServerError('')}
+                aria-label="Dismiss error"
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  color: 'inherit',
+                  fontSize: '18px',
+                  lineHeight: 1,
+                  padding: '0 0 0 8px',
+                  opacity: 0.6,
+                  flexShrink: 0
+                }}
+              >
+                ×
+              </button>
             </div>
           )}
 
-          <form onSubmit={formik.handleSubmit} noValidate>
+          <form onSubmit={formik.handleSubmit} noValidate autoComplete="on">
 
             {/* Email */}
             <div className="field-group">

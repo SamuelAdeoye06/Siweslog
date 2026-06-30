@@ -15,7 +15,7 @@ const AdminDashboard = () => {
   const [actionLoading, setActionLoading] = useState(null)
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async (isBackgroundRefresh = false) => {
       try {
         const [studentsRes, supervisorsRes, pendingRes, profileRes] = await Promise.all([
           API.get('/users?role=student'),
@@ -26,19 +26,30 @@ const AdminDashboard = () => {
         const freshUser = profileRes.data.user
         setSchoolData(freshUser?.schoolId || null)
         updateUser(freshUser)
+
+        const studentsWithoutSupervisor = studentsRes.data.users.filter(
+          s => !s.schoolSupervisor
+        ).length
+
         setStats({
           totalStudents: studentsRes.data.count,
           totalSupervisors: supervisorsRes.data.users.filter(s => s.approvalStatus === 'approved').length,
           pendingSupervisors: pendingRes.data.count,
+          studentsWithoutSupervisor,
         })
         setPendingSupervisors(pendingRes.data.supervisors)
       } catch (err) {
         console.error(err)
       } finally {
-        setLoading(false)
+        if (!isBackgroundRefresh) setLoading(false)
       }
     }
+
     fetchData()
+    // Quietly refresh in the background so numbers stay current without
+    // requiring a manual reload — e.g. a student registering elsewhere.
+    const interval = setInterval(() => fetchData(true), 30000)
+    return () => clearInterval(interval)
   }, [updateUser])
 
   const handleApprove = async (id, action) => {
@@ -74,6 +85,13 @@ const AdminDashboard = () => {
       <div className="dash-stats-grid">
         {[
           { label: 'Total Students', value: stats?.totalStudents ?? 0, badge: 'total', badgeText: 'Registered' },
+          {
+            label: 'Needs Supervisor',
+            value: stats?.studentsWithoutSupervisor ?? 0,
+            badge: stats?.studentsWithoutSupervisor > 0 ? 'pending' : 'active',
+            badgeText: 'Unassigned students',
+            onClick: () => navigate('/admin/students?filter=unassigned')
+          },
           { label: 'Active Supervisors', value: stats?.totalSupervisors ?? 0, badge: 'active', badgeText: 'Approved' },
           { label: 'Pending Approvals', value: stats?.pendingSupervisors ?? 0, badge: 'pending', badgeText: 'Needs review' },
           {
@@ -83,7 +101,12 @@ const AdminDashboard = () => {
             badgeText: 'Share with students'
           },
         ].map((s, i) => (
-          <div key={i} className="dash-stat-card">
+          <div
+            key={i}
+            className="dash-stat-card"
+            onClick={s.onClick}
+            style={s.onClick ? { cursor: 'pointer' } : undefined}
+          >
             <div className="dash-stat-label">{s.label}</div>
             <div className="dash-stat-value">{s.value}</div>
             <span className={`dash-stat-badge ${s.badge}`}>{s.badgeText}</span>

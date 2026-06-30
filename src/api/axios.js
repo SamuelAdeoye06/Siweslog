@@ -19,7 +19,18 @@ API.interceptors.response.use(
   (response) => response,
   async (error) => {
     const original = error.config
+
     if (error.response?.status === 401 && !original._retry) {
+      // FormData bodies (file uploads) can't be safely re-sent after being
+      // consumed once by the browser/XHR layer. Retrying with the same
+      // FormData instance can silently send an empty body, which made
+      // photo uploads "fail" on the first click and only work on the second
+      // (where a brand new FormData was created). For these requests we
+      // refresh the token first, then surface the error so the calling code
+      // can re-trigger the upload with a fresh FormData instead of an
+      // automatic blind retry.
+      const isFormData = typeof FormData !== 'undefined' && original.data instanceof FormData
+
       original._retry = true
       try {
         const res = await axios.post(
@@ -29,6 +40,13 @@ API.interceptors.response.use(
         )
         const newToken = res.data.accessToken
         localStorage.setItem('accessToken', newToken)
+
+        if (isFormData) {
+          // Token is now fresh for the NEXT attempt, but don't retry this
+          // exact request — reject so the UI can prompt a clean re-submit.
+          return Promise.reject(error)
+        }
+
         original.headers.Authorization = `Bearer ${newToken}`
         return API(original)
       } catch (err) {
