@@ -4,9 +4,11 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import API from '../../api/axios'
 import useAuthStore from '../../store/authStore'
+import usePageTitle from '../../hooks/usePageTitle'
 import './LoginPage.css'
 
 const LoginPage = () => {
+  usePageTitle('Sign In')
   const navigate = useNavigate()
   const { setAuth } = useAuthStore()
   const [showPassword, setShowPassword] = useState(false)

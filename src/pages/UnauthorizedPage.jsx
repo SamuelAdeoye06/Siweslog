@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import useAuthStore from '../store/authStore'
+import usePageTitle from '../hooks/usePageTitle'
 import './ErrorPage.css'
 
 const roleDashboard = {
@@ -10,6 +11,7 @@ const roleDashboard = {
 }
 
 const UnauthorizedPage = () => {
+  usePageTitle('Access Denied')
   const navigate = useNavigate()
   const { user } = useAuthStore()
 

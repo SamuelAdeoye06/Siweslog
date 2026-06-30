@@ -4,6 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import API from '../../../api/axios'
 import { useDialog } from '../../../components/dialogContext'
+import usePageTitle from '../../../hooks/usePageTitle'
 import './Supervisor.css'
 
 const DAYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
@@ -207,6 +208,7 @@ const SupervisorStudentView = () => {
   const { studentUserId } = useParams()
   const navigate = useNavigate()
   const { showAlert } = useDialog()
+  usePageTitle('Student Logbook')
 
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState('logbook')

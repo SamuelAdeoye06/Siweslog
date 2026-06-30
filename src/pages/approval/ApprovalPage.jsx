@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import API from '../../api/axios'
+import usePageTitle from '../../hooks/usePageTitle'
 import './ApprovalPage.css'
 
 const dayLabels = [
@@ -12,6 +13,7 @@ const dayLabels = [
 ]
 
 const ApprovalPage = () => {
+  usePageTitle('Review Logbook Entry')
   const { token } = useParams()
   const [log, setLog] = useState(null)
   const [loading, setLoading] = useState(true)

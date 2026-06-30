@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router-dom'
+import usePageTitle from '../../hooks/usePageTitle'
 import './StaticPage.css'
 
 const AboutPage = () => {
+  usePageTitle('About Us')
   const navigate = useNavigate()
   return (
     <div className="static-page">

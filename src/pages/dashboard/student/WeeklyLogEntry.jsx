@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import API from '../../../api/axios'
 import { useDialog } from '../../../components/dialogContext'
+import usePageTitle from '../../../hooks/usePageTitle'
 import './Student.css'
 
 const days = [
@@ -16,6 +17,7 @@ const WeeklyLogEntry = () => {
   const { weekNumber } = useParams()
   const navigate = useNavigate()
   const week = parseInt(weekNumber)
+  usePageTitle(`Week ${week}`)
   const { showConfirm, showAlert: showDialogAlert } = useDialog()
 
   const [log, setLog] = useState(null)

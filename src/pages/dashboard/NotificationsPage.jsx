@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import API from '../../api/axios'
+import usePageTitle from '../../hooks/usePageTitle'
 
 const timeAgo = (date) => {
   const seconds = Math.floor((new Date() - new Date(date)) / 1000)
@@ -28,6 +29,7 @@ const typeIcon = (type) => {
 }
 
 const NotificationsPage = () => {
+  usePageTitle('Notifications')
   const navigate = useNavigate()
   const [notifications, setNotifications] = useState([])
   const [loading, setLoading] = useState(true)

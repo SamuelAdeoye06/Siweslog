@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react'
 import API from '../../../api/axios'
 import { useDialog } from '../../../components/dialogContext'
+import usePageTitle from '../../../hooks/usePageTitle'
 
 const SearchIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -10,6 +11,7 @@ const SearchIcon = () => (
 )
 
 const AdminSupervisors = () => {
+  usePageTitle('Supervisors')
   const [supervisors, setSupervisors] = useState([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState('all')

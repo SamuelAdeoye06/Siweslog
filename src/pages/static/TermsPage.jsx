@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom'
+import usePageTitle from '../../hooks/usePageTitle'
 import './StaticPage.css'
 const TermsPage = () => {
+  usePageTitle('Terms of Use')
   const navigate = useNavigate()
   return (
     <div className="static-page">

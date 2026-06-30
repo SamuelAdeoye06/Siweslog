@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom'
+import usePageTitle from '../../hooks/usePageTitle'
 import './StaticPage.css'
 const CookiePage = () => {
+  usePageTitle('Cookie Policy')
   const navigate = useNavigate()
   return (
     <div className="static-page">

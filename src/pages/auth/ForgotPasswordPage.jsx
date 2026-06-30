@@ -4,6 +4,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import API from '../../api/axios'
 import { useDialog } from '../../components/dialogContext'
+import usePageTitle from '../../hooks/usePageTitle'
 import './LoginPage.css'
 import './RegisterPage.css'
 
@@ -36,6 +37,7 @@ const SuccessAlert = ({ message }) => (
 )
 
 const ForgotPasswordPage = () => {
+  usePageTitle('Reset Password')
   const navigate = useNavigate()
   const { showAlert } = useDialog()
   const [step, setStep] = useState('email')

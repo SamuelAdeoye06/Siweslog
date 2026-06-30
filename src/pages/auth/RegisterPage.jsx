@@ -4,6 +4,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import API from '../../api/axios'
 import useAuthStore from '../../store/authStore'
+import usePageTitle from '../../hooks/usePageTitle'
 import './LoginPage.css'
 import './RegisterPage.css'
 import { nigerianStates, nigerianCities } from '../../utils/nigerianLocations'
@@ -353,6 +354,7 @@ const SuccessScreen = ({ message, navigate }) => (
 )
 
 const RegisterPage = () => {
+  usePageTitle('Create Account')
   const navigate = useNavigate()
   const [selectedRole, setSelectedRole] = useState(null)
   const [successMessage, setSuccessMessage] = useState('')

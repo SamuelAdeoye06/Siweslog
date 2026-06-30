@@ -4,6 +4,8 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import API from '../../../api/axios'
 import { useToast } from '../../../components/ToastContext'
+import { useDialog } from '../../../components/dialogContext'
+import usePageTitle from '../../../hooks/usePageTitle'
 import './Student.css'
 
 const validationSchema = Yup.object({
@@ -22,8 +24,10 @@ const supervisorValidationSchema = Yup.object({
 })
 
 const StudentPlacement = () => {
+  usePageTitle('My Placement')
   const { setPlacementComplete } = useOutletContext() || {}
   const { showToast } = useToast()
+  const { showConfirm } = useDialog()
   const [placement, setPlacement] = useState(null)
   const [duration, setDuration] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -97,7 +101,16 @@ const StudentPlacement = () => {
   })
 
   const handleRemoveSupervisor = async (supervisorId, name) => {
-    if (!window.confirm(`Remove ${name} from your active supervisors? Past approved weeks will still show their name.`)) return
+    const confirmed = await showConfirm(
+      `Remove ${name} from your active supervisors? Past approved weeks will still show their name.`,
+      {
+        title: 'Remove Supervisor',
+        confirmText: 'Remove',
+        cancelText: 'Cancel',
+        variant: 'danger'
+      }
+    )
+    if (!confirmed) return
     setRemovingId(supervisorId)
     try {
       const res = await API.delete(`/placement/supervisors/${supervisorId}`)

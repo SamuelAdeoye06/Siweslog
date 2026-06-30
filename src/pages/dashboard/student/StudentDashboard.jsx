@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import API from '../../../api/axios'
 import useAuthStore from '../../../store/authStore'
+import usePageTitle from '../../../hooks/usePageTitle'
 
 const StudentDashboard = () => {
+  usePageTitle('Dashboard')
   const navigate = useNavigate()
   const { user } = useAuthStore()
   const [logbook, setLogbook] = useState([])

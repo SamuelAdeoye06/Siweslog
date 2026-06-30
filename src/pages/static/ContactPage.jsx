@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import usePageTitle from '../../hooks/usePageTitle'
 import './StaticPage.css'
 
 const ContactPage = () => {
+  usePageTitle('Contact Us')
   const navigate = useNavigate()
   const [sent, setSent] = useState(false)
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })

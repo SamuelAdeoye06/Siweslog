@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react'
 import API from '../../../api/axios'
 import { useDialog } from '../../../components/dialogContext'
+import usePageTitle from '../../../hooks/usePageTitle'
 
 // ── Inline SVG Icons ──
 const TrashIcon = () => (
@@ -21,6 +22,7 @@ const SearchIcon = () => (
 )
 
 const SASchools = () => {
+  usePageTitle('Schools')
   const [schools, setSchools] = useState([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState('')

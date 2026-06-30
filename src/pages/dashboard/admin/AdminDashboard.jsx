@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import API from '../../../api/axios'
 import useAuthStore from '../../../store/authStore'
 import { useDialog } from '../../../components/dialogContext'
+import usePageTitle from '../../../hooks/usePageTitle'
 
 const AdminDashboard = () => {
+  usePageTitle('Dashboard')
   const navigate = useNavigate()
   const { user, updateUser } = useAuthStore()
   const { showAlert } = useDialog()

@@ -5,6 +5,7 @@ import * as Yup from 'yup'
 import API from '../../../api/axios'
 import useAuthStore from '../../../store/authStore'
 import { useToast } from '../../../components/ToastContext'
+import usePageTitle from '../../../hooks/usePageTitle'
 import './SettingsPage.css'
 
 // ── ALERT ──
@@ -566,6 +567,7 @@ const DangerZone = () => {
 
 // ── MAIN SETTINGS PAGE ──
 const SettingsPage = () => {
+  usePageTitle('Settings')
   const [userData, setUserData] = useState(null)
   const [loading, setLoading] = useState(true)
 

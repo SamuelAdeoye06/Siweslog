@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import API from '../../../api/axios'
+import usePageTitle from '../../../hooks/usePageTitle'
 
 const StudentLogbook = () => {
+  usePageTitle('My Logbook')
   const navigate = useNavigate()
   const [logbook, setLogbook] = useState([])
   const [totalWeeks, setTotalWeeks] = useState(24)

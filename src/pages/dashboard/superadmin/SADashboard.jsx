@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import API from '../../../api/axios'
 import { useDialog } from '../../../components/dialogContext'
+import usePageTitle from '../../../hooks/usePageTitle'
 
 const SADashboard = () => {
+  usePageTitle('Dashboard')
   const navigate = useNavigate()
   const { showAlert } = useDialog()
   const [stats, setStats] = useState(null)
