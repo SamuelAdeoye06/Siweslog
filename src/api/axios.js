@@ -1,7 +1,13 @@
 import axios from 'axios'
 
+// In development, falls back to localhost. In production (Vercel), this
+// reads from the VITE_API_URL environment variable set in the Vercel
+// dashboard, pointing at the live Railway backend.
+const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+const refreshURL = `${baseURL}/auth/refresh`
+
 const API = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL,
   withCredentials: true
 })
 
@@ -43,7 +49,7 @@ API.interceptors.response.use(
       original._retry = true
       try {
         const res = await axios.post(
-          'http://localhost:5000/api/auth/refresh',
+          refreshURL,
           {},
           { withCredentials: true }
         )
