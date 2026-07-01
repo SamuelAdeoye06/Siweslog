@@ -27,7 +27,7 @@ const AboutPage = () => {
         </div>
         <div className="static-section">
           <h2>What SIWESlog Does</h2>
-          <p>SIWESlog is a multi-tenant SaaS platform that digitizes the entire SIWES logbook process. Students log their weekly activities online, industry supervisors approve via a simple link sent to their email or WhatsApp, and school supervisors monitor everything from a dashboard in real time.</p>
+          <p>SIWESlog is a multi-tenant SaaS platform that digitizes the entire SIWES logbook process. Students log their weekly activities online, industry supervisors approve via a simple link sent to their email, and school supervisors monitor everything from a dashboard in real time.</p>
           <p>Schools get a complete platform — student management, supervisor assignment, placement tracking, and PDF export for ITF submission. No more paper, no more lost logbooks, no more chasing signatures.</p>
         </div>
         <div className="static-section">

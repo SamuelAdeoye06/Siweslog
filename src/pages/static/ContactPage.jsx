@@ -33,11 +33,23 @@ const ContactPage = () => {
           <div className="contact-info">
             <div className="contact-info-item">
               <div className="contact-info-label">Email</div>
-              <div className="contact-info-value">hello@siweslog.com</div>
+              <a
+                className="contact-info-value contact-info-link"
+                href="mailto:hello@siweslog.com?subject=Enquiry%20about%20SIWESlog&body=Hello%20SIWESlog%20team%2C%0A%0AI%20have%20a%20question%20about..."
+              >
+                hello@siweslog.com
+              </a>
             </div>
             <div className="contact-info-item">
               <div className="contact-info-label">WhatsApp</div>
-              <div className="contact-info-value">+234 800 000 0000</div>
+              <a
+                className="contact-info-value contact-info-link"
+                href="https://wa.me/2347039094213?text=Hello%20SIWESlog%20team%2C%20I%20have%20an%20enquiry%20about%20your%20platform."
+                target="_blank"
+                rel="noreferrer"
+              >
+                +234 703 909 4213
+              </a>
             </div>
             <div className="contact-info-item">
               <div className="contact-info-label">Response Time</div>

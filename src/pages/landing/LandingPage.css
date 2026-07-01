@@ -903,6 +903,24 @@
 .footer-legal a:hover {
   color: rgba(255,255,255,0.5);
 }
+
+.footer-col-link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.55);
+  cursor: pointer;
+  transition: color 0.2s;
+  text-align: left;
+}
+
+.footer-col-link-btn:hover {
+  color: rgba(255,255,255,0.9);
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
   .features-layout {

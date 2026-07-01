@@ -33,7 +33,7 @@ const features = [
   },
   {
     title: 'One-Click Supervisor Approval',
-    desc: 'Industry supervisors get a secure link via email or WhatsApp to review and approve entries — no account needed.',
+    desc: 'Industry supervisors get a secure link via email to review and approve entries — no account needed.',
     icon: (
       <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
     ),
@@ -259,10 +259,10 @@ const LandingPage = () => {
         </div>
         <div className="roles-grid">
           {[
-            { tag: 'Student', title: 'IT Students', desc: 'Log weekly activities, upload evidence, track your progress and submit for supervisor approval — all from your phone.' },
-            { tag: 'Industry', title: 'Industry Supervisors', desc: 'Receive weekly approval requests via WhatsApp or email. Review and sign off on student entries in seconds.' },
+            { tag: 'Student', title: 'IT Students', desc: 'Log weekly activities, upload evidence, track your progress and submit for supervisor approval — all from your device.' },
+            { tag: 'Industry', title: 'Industry Supervisors', desc: 'Receive weekly approval requests via email. Review and sign off on student entries in seconds — no account needed.' },
             { tag: 'Academic', title: 'School Supervisors', desc: 'Monitor assigned students, record visit observations and sign off on logbooks when students return.' },
-            { tag: 'Admin', title: 'IT Unit Admins', desc: 'Manage all students and supervisors, approve placements, track completion rates and export ITF reports.' },
+            { tag: 'Admin', title: 'IT Unit Admins', desc: 'Manage all students and supervisors, assign supervisors to students.' },
           ].map((r, i) => (
             <div key={i} className="role-card">
               <div className="role-tag">{r.tag}</div>
@@ -296,9 +296,9 @@ const LandingPage = () => {
           <div>
             <div className="footer-col-title">Platform</div>
             <ul className="footer-col-links">
-              <li><a onClick={() => document.querySelector('.features').scrollIntoView({ behavior: 'smooth' })} style={{cursor:'pointer'}}>Features</a></li>
-              <li><a onClick={() => document.querySelector('.how').scrollIntoView({ behavior: 'smooth' })} style={{cursor:'pointer'}}>How It Works</a></li>
-              <li><a onClick={() => document.querySelector('.roles').scrollIntoView({ behavior: 'smooth' })} style={{cursor:'pointer'}}>Who It Is For</a></li>
+              <li><button className="footer-col-link-btn" onClick={() => document.querySelector('.features').scrollIntoView({ behavior: 'smooth' })}>Features</button></li>
+              <li><button className="footer-col-link-btn" onClick={() => document.querySelector('.how').scrollIntoView({ behavior: 'smooth' })}>How It Works</button></li>
+              <li><button className="footer-col-link-btn" onClick={() => document.querySelector('.roles').scrollIntoView({ behavior: 'smooth' })}>Who It Is For</button></li>
             </ul>
           </div>
           <div>
